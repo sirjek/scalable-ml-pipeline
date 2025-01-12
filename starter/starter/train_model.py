@@ -1,10 +1,14 @@
 # Script to train machine learning model.
 
 from sklearn.model_selection import train_test_split
-
+import pandas as pd
+import numpy as np
 # Add the necessary imports for the starter code.
 
 # Add code to load in the data.
+df = pd.read_csv("../data/census.csv")
+df.replace(r'^\s*\?\s*$', np.nan, regex=True, inplace=True)
+
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
 train, test = train_test_split(data, test_size=0.20)
