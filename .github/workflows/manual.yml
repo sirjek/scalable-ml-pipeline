@@ -33,6 +33,7 @@ jobs:
   deploy:
     runs-on: ubuntu-22.04
     steps:
+      - uses: actions/checkout@v2 
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.13.15
         with:
