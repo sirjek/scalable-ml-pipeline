@@ -30,6 +30,7 @@ class TestAPI(unittest.TestCase):
 
         response = client.post("/inference", json=valid_data)
         self.assertEqual(response.status_code, 200)
+        self.assertIn("prediction", response.json())
 
     def test_inference_invalid(self):
         invalid_data = {
