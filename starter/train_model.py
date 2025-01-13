@@ -11,7 +11,7 @@ import joblib
 
 def save_model():
     # Add code to load in the data.
-    data = pd.read_csv("../data/census.csv")
+    data = pd.read_csv("./data/census.csv")
     data.replace(r'^\s*\?\s*$', np.nan, regex=True, inplace=True)
     data.columns = data.columns.str.strip()
     '''Optional enhancement, use K-fold cross validation
@@ -43,9 +43,9 @@ def save_model():
 
     model.fit(X_train, y_train)
 
-    joblib.dump(model, "../model/model.joblib")
-    joblib.dump(encoder, "../model/encoder.joblib")
-    joblib.dump(lb, "../model/lb.joblib")
+    joblib.dump(model, "./model/model.joblib")
+    joblib.dump(encoder, "./model/encoder.joblib")
+    joblib.dump(lb, "./model/lb.joblib")
 
     return X_train, y_train, X_test, y_test, model
 

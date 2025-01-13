@@ -8,7 +8,7 @@ from sklearn.compose import ColumnTransformer
 
 def evaluate_slices(model, cat_feature):
     results = []
-    data = pd.read_csv("../data/census.csv")
+    data = pd.read_csv("./data/census.csv")
     data.replace(r'^\s*\?\s*$', np.nan, regex=True, inplace=True)
     data.columns = data.columns.str.strip()
     X = data.drop(columns=["salary"], axis=1)
