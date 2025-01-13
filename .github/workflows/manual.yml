@@ -29,8 +29,9 @@ jobs:
         run: |
           pytest
 
+
   deploy:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-22.04
     steps:
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.13.15
