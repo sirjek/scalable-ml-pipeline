@@ -3,9 +3,11 @@ import requests
 
 BASE_URL = "https://fastapi-ml-pipeline-app-28cb55f41122.herokuapp.com/"
 
+
 def test_get():
     response = requests.get(f"{BASE_URL}/")
     print(f"GET Response: {response.status_code}, {response.json()}")
+
 
 def test_post():
     data = {
@@ -27,6 +29,7 @@ def test_post():
     }
     response = requests.post(f"{BASE_URL}/inference", json=data)
     print(f"POST Response: {response.status_code}, {response.json()}")
+
 
 if __name__ == "__main__":
     test_get()

@@ -4,15 +4,15 @@ from sklearn.model_selection import train_test_split
 # Add the necessary imports for the starter code.
 import pandas as pd
 import numpy as np
-from ml.data import process_data
+from starter.ml.data import process_data
 from sklearn.linear_model import LogisticRegression
 import joblib
-from ml.model import compute_model_metrics, inference
+from starter.ml.model import compute_model_metrics, inference
 
 
 def save_model():
     # Add code to load in the data.
-    data = pd.read_csv("../data/census.csv")
+    data = pd.read_csv("./data/census.csv")
     data.replace(r'^\s*\?\s*$', np.nan, regex=True, inplace=True)
     data.columns = data.columns.str.strip()
     '''Optional enhancement, use K-fold cross validation
@@ -44,9 +44,9 @@ def save_model():
 
     model.fit(X_train, y_train)
 
-    joblib.dump(model, "../model/model.joblib")
-    joblib.dump(encoder, "../model/encoder.joblib")
-    joblib.dump(lb, "../model/lb.joblib")
+    joblib.dump(model, "./model/model.joblib")
+    joblib.dump(encoder, "./model/encoder.joblib")
+    joblib.dump(lb, "./model/lb.joblib")
 
     pred = inference(model, X_test)
     precision, recall, fbeta = compute_model_metrics(y_test, pred)

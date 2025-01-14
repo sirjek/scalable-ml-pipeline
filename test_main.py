@@ -4,6 +4,7 @@ import unittest
 
 client = TestClient(app)
 
+
 class TestAPI(unittest.TestCase):
     def test_root(self):
         r = client.get("/")
@@ -31,8 +32,6 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), {"prediction": [" <=50K"]})
 
-       # self.assertGreater(prediction, 0.5)
-
     def test_predict_above_50k(self):
         valid_data = {
             "age": 35,
@@ -54,6 +53,7 @@ class TestAPI(unittest.TestCase):
         response = client.post("/inference", json=valid_data)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), {"prediction": [" >50K"]})
+
 
 if __name__ == "__main__":
     unittest.main()

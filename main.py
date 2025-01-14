@@ -1,15 +1,13 @@
 # Put the code for your API here.
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
-from typing import List
 import pandas as pd
 import joblib
-from sklearn.preprocessing import OneHotEncoder, LabelBinarizer
-from sklearn.compose import ColumnTransformer
 from starter.ml.data import process_data
 from starter.ml.model import inference
 
 app = FastAPI()
+
 
 class inference_api(BaseModel):
     age: int
@@ -47,9 +45,11 @@ class inference_api(BaseModel):
             }
         }
 
+
 @app.get("/")
 async def root():
     return {"Welcome to Model Inference API"}
+
 
 @app.post("/inference")
 async def inference_api(request: inference_api):
@@ -69,7 +69,8 @@ async def inference_api(request: inference_api):
     ]
 
     X_test, y_test, encoder, lb = process_data(
-        data, categorical_feature=cat_features, label=None, encoder=encoder, lb=lb, training=False
+        data, categorical_feature=cat_features, label=None,
+        encoder=encoder, lb=lb, training=False
     )
 
     preds = inference(model, X_test)
@@ -77,14 +78,3 @@ async def inference_api(request: inference_api):
     mapped_preds = lb.inverse_transform(preds)
 
     return {"prediction": mapped_preds.tolist()}
-
-    
-
-    
-
-   
-
-
-
-
-
