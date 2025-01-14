@@ -26,7 +26,26 @@ class inference_api(BaseModel):
     capital_loss: int = Field(alias="capital-loss")
     hours_per_week: int = Field(alias="hours-per-week")
     native_country: str = Field(alias="native-country")
-    salary: str
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "age": 40,
+                "workclass": "State-gov",
+                "fnlgt": 77516,
+                "education": "Bachelors",
+                "education-num": 13,
+                "marital-status": "Never-married",
+                "occupation": "Adm-clerical",
+                "relationship": "Not-in-family",
+                "race": "White",
+                "sex": "Male",
+                "capital-gain": 2174,
+                "capital-loss": 0,
+                "hours-per-week": 45,
+                "native-country": "United-States",
+            }
+        }
 
 @app.get("/")
 async def root():
@@ -50,12 +69,14 @@ async def inference_api(request: inference_api):
     ]
 
     X_test, y_test, encoder, lb = process_data(
-        data, categorical_feature=cat_features, label="salary", encoder=encoder, lb=lb, training=False
+        data, categorical_feature=cat_features, label=None, encoder=encoder, lb=lb, training=False
     )
 
     preds = inference(model, X_test)
 
-    return {"prediction": preds.tolist()}
+    mapped_preds = lb.inverse_transform(preds)
+
+    return {"prediction": mapped_preds.tolist()}
 
     
 

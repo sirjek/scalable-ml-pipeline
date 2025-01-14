@@ -29,9 +29,9 @@ _Please include the metrics used and your model's performance on those metrics._
     * Recall: Measures the proportion of actual positives identified correctly.
     * fbeta: Measures the harmonic mean of precision and recall.
 * Model Performance:
-    * Precision: 0.73
-    * Recall: 0.27
-    * fbeta: 0.39
+    * Precision: 0.728
+    * Recall: 0.276
+    * fbeta: 0.400
 
 
 ## Ethical Considerations
